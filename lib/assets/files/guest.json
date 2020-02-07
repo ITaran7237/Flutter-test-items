@@ -1,0 +1,20 @@
+{
+  "guestCount": 3,
+  "guests": [
+    {
+      "name": "Ted",
+      "age": 25,
+      "pair": ""
+    },
+    {
+      "name": "Ted",
+      "age": 28,
+      "pair": "+one"
+    },
+    {
+      "name": "Bred",
+      "age": 29,
+      "pair": ""
+    }
+  ]
+}
