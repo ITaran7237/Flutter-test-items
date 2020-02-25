@@ -24,7 +24,7 @@ class LessonDetails extends StatelessWidget {
           'Introduction \nto Driving',
           style: TextStyle(color: Colors.white, fontSize: 40.0),
         ),
-        SizedBox(height: 50.0),
+        SizedBox(height: 40.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
