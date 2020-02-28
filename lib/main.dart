@@ -30,14 +30,13 @@ class _CounterWidgetState extends State<CounterWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('You have pushed the button this many times:'),
               StreamBuilder<int>(
                   stream: counterBloc.counter,
                   initialData: 0,
                   builder: (context, snapshot) {
                     return Text(
                       '${snapshot.data.toString()}',
-                      style: Theme.of(context).textTheme.headline2,
+                      style: TextStyle(fontSize: 100.0),
                     );
                   }),
             ],
@@ -47,12 +46,14 @@ class _CounterWidgetState extends State<CounterWidget> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             FloatingActionButton(
-              onPressed: () => counterBloc.counterEventSink.add(IncrementEvent()),
+              onPressed: () =>
+                  counterBloc.counterEventSink.add(IncrementEvent()),
               child: Icon(Icons.add),
             ),
             SizedBox(width: 16.0),
             FloatingActionButton(
-              onPressed: () => counterBloc.counterEventSink.add(DecrementEvent()),
+              onPressed: () =>
+                  counterBloc.counterEventSink.add(DecrementEvent()),
               child: Icon(Icons.remove),
             )
           ],
