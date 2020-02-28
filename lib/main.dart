@@ -1,14 +1,211 @@
-import 'package:first_flutter_app/LessonDetails.dart';
+import 'package:first_flutter_app/lesson_details.dart';
+import 'package:first_flutter_app/lesson_model.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(DrivingLesson());
 
-class MyApp extends StatelessWidget {
+class DrivingLesson extends StatefulWidget {
+  @override
+  _DrivingLessonState createState() => _DrivingLessonState();
+}
+
+class _DrivingLessonState extends State<DrivingLesson> {
+  List _list;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: LessonDetails()),
+      theme: ThemeData(
+          primarySwatch: Colors.grey,
+          primaryTextTheme: TextTheme(title: TextStyle(color: Colors.white))),
+      home: Scaffold(
+        backgroundColor: Color(0xFF3A4256),
+        bottomNavigationBar: _bottomNavigationBar,
+        appBar: _appBar,
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: _list.length,
+              itemBuilder: (BuildContext context, int index) =>
+                  _createCard(context, _list[index])),
+        ),
+      ),
     );
+  }
+
+  @override
+  void initState() {
+    _list = _mockDataLessons();
+    super.initState();
+  }
+
+  final _bottomNavigationBar = BottomNavigationBar(
+    type: BottomNavigationBarType.fixed,
+    backgroundColor: Color(0xff3B4256),
+    unselectedItemColor: Colors.white,
+    showSelectedLabels: false,
+    showUnselectedLabels: false,
+    items: const <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+          icon: Icon(Icons.content_paste, color: Colors.yellow),
+          title: Text('')),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.ondemand_video), title: Text('')),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.monetization_on), title: Text('')),
+      BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('')),
+    ],
+  );
+
+  final _appBar = AppBar(
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    centerTitle: true,
+    title: Text('Lessons'),
+    actions: <Widget>[
+      IconButton(
+        icon: Icon(
+          Icons.sort,
+          color: Colors.white,
+        ),
+        onPressed: () => { print('Menu') },
+      ),
+    ],
+  );
+
+  Card _createCard(BuildContext context, LessonModel lesson) => Card(
+        elevation: 4.0,
+        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        child: Container(
+          decoration: BoxDecoration(color: Color.fromRGBO(60, 60, 60, 1.0)),
+          child: _createItem(context, lesson),
+        ),
+      );
+
+  _createItem(BuildContext context, LessonModel lesson) {
+    return Container(
+        color: Color(0xFF404B60),
+        child: ListTile(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => LessonDetails(data: lesson)));
+          },
+          leading: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(lesson.icon, color: Colors.white),
+//todo add this view and check
+//              Padding(
+//                child: Container(
+//                  width: 1.0,
+//                  height: double.infinity,
+//                  color: Color(0xff455166),
+//                ),
+//                padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+//              ),
+            ],
+          ),
+          title: Text(lesson.title,
+              style: TextStyle(color: Colors.white, fontSize: 16.0)),
+          subtitle: Row(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  height: 8,
+                  width: 32,
+                  child: LinearProgressIndicator(
+                    value: lesson.indicator,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),
+                    backgroundColor: Color(0xFF575B7C),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child:
+                    Text(lesson.level, style: TextStyle(color: Colors.white)),
+              ),
+            ],
+          ),
+          trailing: Icon(
+            Icons.arrow_forward,
+            color: Colors.white,
+          ),
+        ));
+  }
+
+  List _mockDataLessons() {
+    return [
+      LessonModel(
+          icon: Icons.directions_car,
+          title: "Introduction to Driving",
+          level: "Beginner",
+          indicator: 0.3,
+          price: 20,
+          lessonContent:
+              "We recommend that you take a series of driving lessons with an AA Driving Instructor.  Our experience shows that only taking a single lesson before a test is unlikely to provide you with the skills and confidence necessary to pass the test."),
+      LessonModel(
+          icon: Icons.beach_access,
+          title: "Observation at Junction",
+          level: "Beginner",
+          indicator: 0.4,
+          price: 55,
+          lessonContent:
+              "We recommend that you take a series of driving lessons with an AA Driving Instructor.  Our experience shows that only taking a single lesson before a test is unlikely to provide you with the skills and confidence necessary to pass the test."),
+      LessonModel(
+          icon: Icons.account_balance,
+          title: "Reverse Parallel Parking",
+          level: "Intermidiate",
+          indicator: 0.66,
+          price: 30,
+          lessonContent:
+              "We recommend that you take a series of driving lessons with an AA Driving Instructor.  Our experience shows that only taking a single lesson before a test is unlikely to provide you with the skills and confidence necessary to pass the test."),
+      LessonModel(
+          icon: Icons.speaker_notes_off,
+          title: "Observation at Junction",
+          level: "Reversing Around Corner",
+          indicator: 0.75,
+          price: 40,
+          lessonContent:
+              "We recommend that you take a series of driving lessons with an AA Driving Instructor.  Our experience shows that only taking a single lesson before a test is unlikely to provide you with the skills and confidence necessary to pass the test."),
+      LessonModel(
+          icon: Icons.restaurant,
+          title: "Incorrect Use of Signals",
+          level: "Advanced",
+          indicator: 1.0,
+          price: 90,
+          lessonContent:
+              "We recommend that you take a series of driving lessons with an AA Driving Instructor.  Our experience shows that only taking a single lesson before a test is unlikely to provide you with the skills and confidence necessary to pass the test."),
+      LessonModel(
+          icon: Icons.map,
+          title: "Reverse Parallel Parking",
+          level: "Advanced",
+          indicator: 0.9,
+          price: 60,
+          lessonContent:
+              "We recommend that you take a series of driving lessons with an AA Driving Instructor.  Our experience shows that only taking a single lesson before a test is unlikely to provide you with the skills and confidence necessary to pass the test."),
+      LessonModel(
+          icon: Icons.directions,
+          title: "Reversing Around Corner",
+          level: "Advanced",
+          indicator: 1.0,
+          price: 80,
+          lessonContent:
+              "We recommend that you take a series of driving lessons with an AA Driving Instructor.  Our experience shows that only taking a single lesson before a test is unlikely to provide you with the skills and confidence necessary to pass the test."),
+      LessonModel(
+          icon: Icons.restaurant,
+          title: "Incorrect Use of Signals",
+          level: "Advanced",
+          indicator: 1.0,
+          price: 90,
+          lessonContent:
+              "We recommend that you take a series of driving lessons with an AA Driving Instructor.  Our experience shows that only taking a single lesson before a test is unlikely to provide you with the skills and confidence necessary to pass the test."),
+    ];
   }
 }
