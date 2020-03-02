@@ -13,9 +13,9 @@ class CounterBloc {
   }
 
   StreamSink<int> get _inCounter => _counterStateController.sink;
-  //output stream
+
   Stream<int> get counter => _counterStateController.stream;
-  //input stream
+
   Sink<CounterEvent> get counterEventSink => _eventStateController.sink;
 
   void _mapEventToState(CounterEvent event) {

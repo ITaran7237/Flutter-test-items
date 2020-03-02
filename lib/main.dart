@@ -36,7 +36,7 @@ class _CounterWidgetState extends State<CounterWidget> {
                   builder: (context, snapshot) {
                     return Text(
                       '${snapshot.data.toString()}',
-                      style: TextStyle(fontSize: 100.0),
+                      style: TextStyle(fontSize: 100),
                     );
                   }),
             ],
@@ -50,7 +50,7 @@ class _CounterWidgetState extends State<CounterWidget> {
                   counterBloc.counterEventSink.add(IncrementEvent()),
               child: Icon(Icons.add),
             ),
-            SizedBox(width: 16.0),
+            SizedBox(width: 16),
             FloatingActionButton(
               onPressed: () =>
                   counterBloc.counterEventSink.add(DecrementEvent()),
