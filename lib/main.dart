@@ -24,7 +24,7 @@ class _DrivingLessonState extends State<DrivingLesson> {
         bottomNavigationBar: _bottomNavigationBar,
         appBar: _appBar,
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
@@ -64,23 +64,29 @@ class _DrivingLessonState extends State<DrivingLesson> {
     backgroundColor: Colors.transparent,
     elevation: 0,
     centerTitle: true,
-    title: Text('Lessons'),
+    title: Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Text('Lessons'),
+    ),
     actions: <Widget>[
-      IconButton(
-        icon: Icon(
-          Icons.sort,
-          color: Colors.white,
+      Padding(
+        padding: const EdgeInsets.only(top: 10, right: 8),
+        child: IconButton(
+          icon: Icon(
+            Icons.sort,
+            color: Colors.white,
+          ),
+          onPressed: () => {},
         ),
-        onPressed: () => { print('Menu') },
       ),
     ],
   );
 
   Card _createCard(BuildContext context, LessonModel lesson) => Card(
-        elevation: 4.0,
-        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        elevation: 4,
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         child: Container(
-          decoration: BoxDecoration(color: Color.fromRGBO(60, 60, 60, 1.0)),
+          decoration: BoxDecoration(color: Color.fromRGBO(60, 60, 60, 1)),
           child: _createItem(context, lesson),
         ),
       );
@@ -99,45 +105,37 @@ class _DrivingLessonState extends State<DrivingLesson> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Icon(lesson.icon, color: Colors.white),
-//todo add this view and check
-//              Padding(
-//                child: Container(
-//                  width: 1.0,
-//                  height: double.infinity,
-//                  color: Color(0xff455166),
-//                ),
-//                padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-//              ),
             ],
           ),
           title: Text(lesson.title,
-              style: TextStyle(color: Colors.white, fontSize: 16.0)),
+              style: TextStyle(color: Colors.white, fontSize: 16)),
           subtitle: Row(
             children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Container(
-                  height: 8,
-                  width: 32,
-                  child: LinearProgressIndicator(
-                    value: lesson.indicator,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),
-                    backgroundColor: Color(0xFF575B7C),
-                  ),
-                ),
-              ),
+              _progressIndicator(lesson),
               Padding(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 8),
                 child:
                     Text(lesson.level, style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
-          trailing: Icon(
-            Icons.arrow_forward,
-            color: Colors.white,
-          ),
+          trailing: Icon(Icons.arrow_forward, color: Colors.white),
         ));
+  }
+
+  ClipRRect _progressIndicator(LessonModel lesson) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        height: 8,
+        width: 32,
+        child: LinearProgressIndicator(
+          value: lesson.indicator,
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),
+          backgroundColor: Color(0xFF575B7C),
+        ),
+      ),
+    );
   }
 
   List _mockDataLessons() {

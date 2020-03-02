@@ -21,8 +21,8 @@ class LessonDetails extends StatelessWidget {
 
   Positioned arrowBack(BuildContext context) {
     return Positioned(
-      left: 16.0,
-      top: 50.0,
+      left: 16,
+      top: 50,
       child: InkWell(
         onTap: () => Navigator.pop(context),
         child: Icon(Icons.arrow_back, color: Colors.white),
@@ -51,18 +51,18 @@ class LessonDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: 40.0, right: 40.0),
-            child:
-                Text(data.lessonContent, style: TextStyle(color: Colors.black, fontSize: 16.0)),
+            padding: EdgeInsets.only(left: 40, right: 40),
+            child: Text(data.lessonContent,
+                style: TextStyle(color: Colors.black, fontSize: 16)),
           ),
           SizedBox(height: 60),
           Padding(
-            padding: EdgeInsets.all(30.0),
+            padding: EdgeInsets.all(30),
             child: RaisedButton(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0)),
+                  borderRadius: BorderRadius.circular(5)),
               child: Text('Take this lesson'.toUpperCase(),
-                  style: TextStyle(color: Colors.white, fontSize: 16.0)),
+                  style: TextStyle(color: Colors.white, fontSize: 16)),
               color: Color(0xff475168),
               onPressed: () => print('Take this lesson'),
             ),
@@ -74,16 +74,15 @@ class LessonDetails extends StatelessWidget {
 
   Padding getTopContent() {
     return Padding(
-      padding: EdgeInsets.only(left: 40.0, right: 40.0),
+      padding: EdgeInsets.only(left: 40, right: 40),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(height: 110.0),
-          Icon(data.icon, color: Colors.white, size: 30.0),
-          Container(width: 50.0, child: Divider(color: Colors.yellowAccent)),
-          Text(data.title,
-              style: TextStyle(color: Colors.white, fontSize: 40.0)),
-          SizedBox(height: 40.0),
+          SizedBox(height: 110),
+          Icon(data.icon, color: Colors.white, size: 30),
+          Container(width: 50, child: Divider(color: Colors.yellowAccent)),
+          Text(data.title, style: TextStyle(color: Colors.white, fontSize: 40)),
+          SizedBox(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -94,7 +93,7 @@ class LessonDetails extends StatelessWidget {
               Expanded(
                   flex: 6,
                   child: Padding(
-                      padding: EdgeInsets.only(left: 10.0),
+                      padding: EdgeInsets.only(left: 10),
                       child: Text(data.level,
                           style: TextStyle(color: Colors.white)))),
               Expanded(
@@ -110,10 +109,10 @@ class LessonDetails extends StatelessWidget {
 
   Container showPrice() {
     return Container(
-      padding: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.white),
-          borderRadius: BorderRadius.circular(5.0)),
+          borderRadius: BorderRadius.circular(5)),
       child: Text("\$${data.price}", style: TextStyle(color: Colors.white)),
     );
   }
