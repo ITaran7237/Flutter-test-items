@@ -1,4 +1,4 @@
-import 'package:first_flutter_app/lesson_model.dart';
+import 'package:first_flutter_app/models/lesson_model.dart';
 import 'package:flutter/material.dart';
 
 class LessonDetails extends StatelessWidget {

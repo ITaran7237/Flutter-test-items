@@ -1,5 +1,6 @@
-import 'package:first_flutter_app/lesson_details.dart';
-import 'package:first_flutter_app/lesson_model.dart';
+import 'package:first_flutter_app/models/lesson_model.dart';
+import 'package:first_flutter_app/ui/lesson/lesson_details.dart';
+import 'package:first_flutter_app/ui/profile/profile.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(DrivingLesson());
@@ -11,6 +12,7 @@ class DrivingLesson extends StatefulWidget {
 
 class _DrivingLessonState extends State<DrivingLesson> {
   List _list;
+  int _cIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class _DrivingLessonState extends State<DrivingLesson> {
           primaryTextTheme: TextTheme(title: TextStyle(color: Colors.white))),
       home: Scaffold(
         backgroundColor: Color(0xFF3A4256),
-        bottomNavigationBar: _bottomNavigationBar,
+        bottomNavigationBar: _bottomNavigationBar(context),
         appBar: _appBar,
         body: Padding(
           padding: const EdgeInsets.all(8),
@@ -42,23 +44,51 @@ class _DrivingLessonState extends State<DrivingLesson> {
     super.initState();
   }
 
-  final _bottomNavigationBar = BottomNavigationBar(
-    type: BottomNavigationBarType.fixed,
-    backgroundColor: Color(0xff3B4256),
-    unselectedItemColor: Colors.white,
-    showSelectedLabels: false,
-    showUnselectedLabels: false,
-    items: const <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-          icon: Icon(Icons.content_paste, color: Colors.yellow),
-          title: Text('')),
+  BottomNavigationBar _bottomNavigationBar(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: _cIndex,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Color(0xff3B4256),
+      unselectedItemColor: Colors.white,
+      selectedItemColor: Colors.yellow,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      items: getNavigationItem(),
+      onTap: _onTabTapped(context),
+    );
+  }
+
+  List<BottomNavigationBarItem> getNavigationItem() {
+    return const <BottomNavigationBarItem>[
+      BottomNavigationBarItem(icon: Icon(Icons.content_paste), title: Text('')),
       BottomNavigationBarItem(
           icon: Icon(Icons.ondemand_video), title: Text('')),
       BottomNavigationBarItem(
           icon: Icon(Icons.monetization_on), title: Text('')),
       BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('')),
-    ],
-  );
+    ];
+  }
+
+  void _onTabTapped(BuildContext context, [int index]) {
+    setState(() {
+      _cIndex = index;
+      handleNavigationItem(context);
+    });
+  }
+
+  void handleNavigationItem(BuildContext context) {
+    switch (_cIndex) {
+      case 0:
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+    }
+  }
 
   final _appBar = AppBar(
     backgroundColor: Colors.transparent,
