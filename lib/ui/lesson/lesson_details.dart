@@ -79,9 +79,16 @@ class LessonDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 110),
-          Icon(data.icon, color: Colors.white, size: 30),
+          Hero(
+            tag: data.icon,
+            child: Icon(data.icon, color: Colors.white, size: 30),
+          ),
           Container(width: 50, child: Divider(color: Colors.yellowAccent)),
-          Text(data.title, style: TextStyle(color: Colors.white, fontSize: 40)),
+          Hero(
+            tag: data.title,
+            child: Text(data.title,
+                style: TextStyle(color: Colors.white, fontSize: 40)),
+          ),
           SizedBox(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
