@@ -4,9 +4,6 @@ class Price extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Price'),
-      ),
       body: Center(
         child: Text('Price',
             style: TextStyle(color: Colors.white, fontSize: 30.0)),

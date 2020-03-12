@@ -13,13 +13,12 @@ class Profile extends StatelessWidget {
               return Text('Loading...');
             default:
               return Scaffold(
-                appBar: AppBar(
-                  title: Text("Profile"),
-                ),
                 body: Center(
-                  child: Text(snapshot.data.documents[0].data.values.elementAt(0),
-                      style: TextStyle(color: Colors.white, fontSize: 30.0)),
+                  child: Text(
+                      snapshot.data.documents[0].data.values.elementAt(0),
+                      style: TextStyle(color: Colors.white, fontSize: 40.0)),
                 ),
+                backgroundColor: Color.fromRGBO(200, 200, 200, 0.2),
               );
           }
         });

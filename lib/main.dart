@@ -1,4 +1,5 @@
 import 'package:first_flutter_app/models/lesson_model.dart';
+import 'package:first_flutter_app/ui/lesson/lesson.dart';
 import 'package:first_flutter_app/ui/lesson/lesson_details.dart';
 import 'package:first_flutter_app/ui/price/price.dart';
 import 'package:first_flutter_app/ui/profile/profile.dart';
@@ -16,6 +17,8 @@ class _DrivingLessonState extends State<DrivingLesson> {
   List _list;
   int index = 0;
 
+  final List<Widget> _children = [Lesson(), Video(), Price(), Profile()];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,17 +28,18 @@ class _DrivingLessonState extends State<DrivingLesson> {
           primaryTextTheme: TextTheme(title: TextStyle(color: Colors.white))),
       home: Scaffold(
         backgroundColor: Color(0xFF3A4256),
-        bottomNavigationBar: _bottomNavigationBar(context),
+        bottomNavigationBar: _bottomNavigationBar(),
         appBar: _appBar,
-        body: Padding(
-          padding: const EdgeInsets.all(8),
-          child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: _list.length,
-              itemBuilder: (BuildContext context, int index) =>
-                  _createCard(context, _list[index])),
-        ),
+        body: _children[index],
+//        body: Padding(
+//          padding: const EdgeInsets.all(8),
+//          child: ListView.builder(
+//              scrollDirection: Axis.vertical,
+//              shrinkWrap: true,
+//              itemCount: _list.length,
+//              itemBuilder: (BuildContext context, int index) =>
+//                  _createCard(context, _list[index])),
+//        ),
       ),
     );
   }
@@ -46,7 +50,7 @@ class _DrivingLessonState extends State<DrivingLesson> {
     super.initState();
   }
 
-  BottomNavigationBar _bottomNavigationBar(BuildContext context) {
+  BottomNavigationBar _bottomNavigationBar() {
     return BottomNavigationBar(
       currentIndex: index,
       type: BottomNavigationBarType.fixed,
@@ -56,7 +60,7 @@ class _DrivingLessonState extends State<DrivingLesson> {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       items: getNavigationItem(),
-      onTap: _onTabTapped(context),
+      onTap: _onTabTapped,
     );
   }
 
@@ -71,30 +75,10 @@ class _DrivingLessonState extends State<DrivingLesson> {
     ];
   }
 
-  _onTabTapped(BuildContext context, [int index]) {
+  _onTabTapped(int index) {
     setState(() {
       this.index = index;
     });
-      handleNavigationItem(context);
-  }
-
-  void handleNavigationItem(BuildContext context) {
-    switch (index) {
-      case 0:
-        break;
-      case 1:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Video()));
-        break;
-      case 2:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Price()));
-        break;
-      case 3:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Profile()));
-        break;
-    }
   }
 
   final _appBar = AppBar(
