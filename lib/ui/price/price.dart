@@ -6,9 +6,9 @@ class Price extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text('Price',
-            style: TextStyle(color: Colors.white, fontSize: 30.0)),
+            style: TextStyle(color: Colors.white, fontSize: 40.0)),
       ),
-      backgroundColor: Color.fromRGBO(200, 200, 200, 0.2),
+      backgroundColor: Color(0xFF404B60),
     );
   }
 }
