@@ -59,8 +59,11 @@ class _LessonState extends State<Lesson> {
           ),
           title: Hero(
             tag: data.title,
-            child: Text(data.title,
-                style: TextStyle(color: Colors.white, fontSize: 16)),
+            child: Material(
+              color: Colors.transparent,
+              child: Text(data.title,
+                  style: TextStyle(color: Colors.white, fontSize: 16)),
+            ),
           ),
           subtitle: Row(
             children: <Widget>[

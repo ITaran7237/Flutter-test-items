@@ -86,8 +86,11 @@ class LessonDetails extends StatelessWidget {
           Container(width: 50, child: Divider(color: Colors.yellowAccent)),
           Hero(
             tag: data.title,
-            child: Text(data.title,
-                style: TextStyle(color: Colors.white, fontSize: 40)),
+            child: Material(
+              color: Colors.transparent,
+              child: Text(data.title,
+                  style: TextStyle(color: Colors.white, fontSize: 40)),
+            ),
           ),
           SizedBox(height: 40),
           Row(
