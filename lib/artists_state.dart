@@ -10,7 +10,7 @@ class ArtistsInitial extends ArtistsState {
   List<Object> get props => [];
 }
 
-class ArtistsLoading extends ArtistsState {
+class Loading extends ArtistsState {
   @override
   List<Object> get props => [];
 }
@@ -24,11 +24,11 @@ class ArtistsLoaded extends ArtistsState {
   List<Object> get props => [results];
 }
 
-class ArtistSearching extends ArtistsState {
-  bool isSearching;
+class ArtistsToDBSaved extends ArtistsState {
+  final bool isSuccessful;
 
-  ArtistSearching(this.isSearching) : super();
+  ArtistsToDBSaved(this.isSuccessful) : super();
 
   @override
-  List<Object> get props => [isSearching];
+  List<Object> get props => [isSuccessful];
 }
