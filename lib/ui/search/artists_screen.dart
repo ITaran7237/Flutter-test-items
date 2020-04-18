@@ -33,6 +33,7 @@ class _ArtistsScreenState extends State<ArtistsScreen> {
                   hoverColor: Colors.white),
             ),
           ),
+
           RaisedButton(
             onPressed: () => _changeText(_emailController.text),
             child: Text("Search"),
