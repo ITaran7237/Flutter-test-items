@@ -1,4 +1,4 @@
-import 'package:first_flutter_app/artists_bloc.dart';
+import 'package:first_flutter_app/bloc/search/artists_bloc.dart';
 import 'package:first_flutter_app/ui/history/history.dart';
 import 'package:first_flutter_app/ui/search/artists_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +19,7 @@ class Search extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings, color: Colors.white),
-            onPressed: () {
-              Navigator.pushNamed(context, History.routeName);
-            },
+            onPressed: () => Navigator.pushNamed(context, History.routeName),
           ),
         ],
       ),

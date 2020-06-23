@@ -32,3 +32,12 @@ class ArtistsToDBSaved extends ArtistsState {
   @override
   List<Object> get props => [isSuccessful];
 }
+
+class HistoryLoaded extends ArtistsState {
+  final List<Results> results;
+
+  HistoryLoaded(this.results) : super();
+
+  @override
+  List<Object> get props => [results];
+}

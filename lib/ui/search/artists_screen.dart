@@ -1,9 +1,10 @@
-import 'package:first_flutter_app/artists_bloc.dart';
-import 'package:first_flutter_app/artists_event.dart';
-import 'package:first_flutter_app/artists_state.dart';
+import 'package:first_flutter_app/bloc/search/artists_bloc.dart';
+import 'package:first_flutter_app/bloc/search/artists_event.dart';
+import 'package:first_flutter_app/bloc/search/artists_state.dart';
 import 'package:first_flutter_app/models/artists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:toast/toast.dart';
 
 class ArtistsScreen extends StatefulWidget {
   @override
@@ -11,8 +12,15 @@ class ArtistsScreen extends StatefulWidget {
 }
 
 class _ArtistsScreenState extends State<ArtistsScreen> {
-  var _emailController = TextEditingController();
-  List<Results> _list;
+  final TextEditingController _emailController = TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  ArtistsBloc artistsBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    artistsBloc = context.bloc<ArtistsBloc>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +43,7 @@ class _ArtistsScreenState extends State<ArtistsScreen> {
           ),
 
           RaisedButton(
-            onPressed: () => _changeText(_emailController.text),
+            onPressed: () => _searchText(_emailController.text),
             child: Text("Search"),
           ),
           Container(
@@ -48,21 +56,12 @@ class _ArtistsScreenState extends State<ArtistsScreen> {
     );
   }
 
-  _changeText(String text) {
-    setState(() {
-      final artistsBloc = BlocProvider.of<ArtistsBloc>(context);
-      text.isNotEmpty ? artistsBloc.add(GetArtists(text)) : text;
-      print('text = $text');
-    });
-  }
-
-  _changeText2(List<Results> results) {
-    setState(() {
-      final artistsBloc = BlocProvider.of<ArtistsBloc>(context);
-      artistsBloc.add(SaveArtists(results));
-      print('text = $results');
-    });
-  }
+  _searchText(String text) {
+    _emailFocusNode.unfocus();
+    text.isNotEmpty
+        ? artistsBloc.add(GetArtists(text))
+        : Toast.show("Please enter your text", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+}
 
   BlocBuilder<ArtistsBloc, ArtistsState> _handleArtistsState() {
     return BlocBuilder<ArtistsBloc, ArtistsState>(
@@ -73,13 +72,10 @@ class _ArtistsScreenState extends State<ArtistsScreen> {
         } else if (state is Loading) {
           return _buildLoading();
         } else if (state is ArtistsLoaded) {
-          _changeText2(state.results);
           return _initListView(state.results);
         } else if (state is ArtistsToDBSaved) {
           if (state.isSuccessful) {
-            print("Save to db Success");
-          } else {
-            print("Save to db Success = NULL");
+            return Container();
           }
         }
       },
@@ -87,15 +83,14 @@ class _ArtistsScreenState extends State<ArtistsScreen> {
   }
 
   Padding _initListView(List<Results> results) {
-    _list = results;
     return Padding(
       padding: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
       child: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          itemCount: _list == null ? 0 : _list.length,
+          itemCount: results.length,
           itemBuilder: (BuildContext context, int index) =>
-              _createCard(context, _list[index])),
+              _createCard(context, results[index])),
     );
   }
 

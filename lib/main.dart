@@ -11,7 +11,7 @@ enum ResultScreen { Search, History }
 void main() async {
   runApp(MusicalArtists());
   final database =
-      await $FloorAppDatabase.databaseBuilder('floor_database.db').build();
+  await $FloorAppDatabase.databaseBuilder('floor_database.db').build();
   DatabaseManager.initDatabase(database);
   Stetho.initialize();
 }
