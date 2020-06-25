@@ -19,13 +19,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^0.13.4+1
-  dio: ^3.0.9
-  floor: ^0.11.0
-  bloc: ^3.0.0
-  flutter_bloc: ^3.2.0
-  equatable: ^1.1.1
-  flutter_stetho: ^0.5.2
   toast: ^0.1.5
 
   # The following adds the Cupertino Icons font to your application.
@@ -35,8 +28,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  floor_generator: ^0.11.0
-  build_runner: ^1.7.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
